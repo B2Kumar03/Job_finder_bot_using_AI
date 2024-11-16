@@ -3,13 +3,14 @@ import {  FaMicrosoft, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const navigate = useNavigate();
+const Signup = () => {
+  const [isLogin, setIsLogin] = useState(false);
+  const navigate=useNavigate()
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    navigate("/signup");
+    navigate("/login");
+
   };
 
   return (
@@ -98,4 +99,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

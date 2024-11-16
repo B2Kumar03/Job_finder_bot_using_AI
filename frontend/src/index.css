@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom global styles */
+body {
+  @apply bg-gray-50 text-gray-800; /* Light background and dark text */
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  @apply text-secondary font-bold; /* Apply secondary color to headings */
+}
+
+button {
+  @apply text-white font-medium rounded-lg; /* Basic button styling */
+}
+
+a {
+  @apply text-primary hover:underline; /* Primary color for links */
+}

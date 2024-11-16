@@ -1,13 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
+import './App.css'
+import Footer from './components/Footer'
+import JobCard from './components/JobCard';
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import AllRoutes from './routes/AllRoutes';
+
+const job = {
+  title: "Frontend Developer",
+  company: "TechCorp",
+  location: "Remote",
+  tags: ["React", "JavaScript", "Full-Time"],
+  applyLink: "https://apply.example.com",
+};
 function App() {
-  const [count, setCount] = useState(0)
+ 
+
 
   return (
-    <h1 className=''>Hello world</h1>
+    <>
+   <AllRoutes/>
+    </>
   )
 }
 

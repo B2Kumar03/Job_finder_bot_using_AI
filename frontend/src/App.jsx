@@ -3,6 +3,7 @@ import './App.css'
 import Footer from './components/Footer'
 import JobCard from './components/JobCard';
 import Navbar from './components/Navbar'
+import EditProfile from './pages/EditProfile';
 import Home from './pages/Home'
 import Login from './pages/Login';
 import Profile from './pages/Profile';
@@ -24,6 +25,8 @@ function App() {
     <Navbar/>
    <AllRoutes/>
    <Footer/>
+   <Profile/>
+   <EditProfile/>
     </>
   )
 }

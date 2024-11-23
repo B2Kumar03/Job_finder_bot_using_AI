@@ -39,7 +39,11 @@ const userSchema = new mongoose.Schema(
     },
     jobPreferences: {
       location: { type: String, default: "Remote" }, // Preferred location
-      jobType: { type: String, enum: ["Full-Time", "Part-Time", "Freelance"], default: "Full-Time" },
+      jobType: {
+        type: String,
+        enum: ["Full-Time", "Part-Time", "Freelance"],
+        default: "Full-Time",
+      },
     },
     notifications: [
       {
@@ -53,13 +57,27 @@ const userSchema = new mongoose.Schema(
       githubId: { type: String },
       microsoftId: { type: String },
     },
-    resetPasswordToken: { type: String },
-    resetPasswordExpires: { type: Date },
+    recommendations: [
+      {
+        jobId: { type: mongoose.Schema.Types.ObjectId, ref: "Job" },
+        matchedSkills: { type: Number }, // To store how well the job matches
+      },
+    ],
+    appliedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
+    token: { type: String },  //to stor applied jobs
   },
   { timestamps: true }
 );
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 const User = mongoose.model("User", userSchema);
 
-
-export defaultUser;
+export default User;

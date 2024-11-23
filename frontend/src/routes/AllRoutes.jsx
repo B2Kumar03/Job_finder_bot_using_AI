@@ -7,6 +7,7 @@ import NotFound from '../pages/NotFound'
 import Signup from '../pages/Signup'
 import JobDetails from '../pages/JobDetails'
 import Dashboard from '../pages/Dashboard'
+import EditProfile from '../pages/EditProfile'
 
 const AllRoutes = () => {
   return (
@@ -17,6 +18,7 @@ const AllRoutes = () => {
         <Route path="/signup" element={<Signup/>} />
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/jobdetails' element={<JobDetails />} />
+        <Route path='/editprofile' element={<EditProfile />} />
         <Route path="*" element={<NotFound />} />
      </Routes>
   )

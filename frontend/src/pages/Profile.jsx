@@ -1,7 +1,9 @@
 import React from "react";
 import { FaLinkedin, FaGithub, FaTwitter, FaCamera } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate(); // Add this line to use navigate hook
   const user = {
     name: "John Doe",
     email: "johndoe@example.com",
@@ -108,7 +110,9 @@ const Profile = () => {
 
         {/* Edit Profile Button */}
         <div className="mt-8 text-center">
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700" onClick={()=>{
+            navigate("/editprofile")
+          }}>
             Edit Profile
           </button>
         </div>

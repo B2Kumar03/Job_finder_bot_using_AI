@@ -25,8 +25,7 @@ function App() {
     <Navbar/>
    <AllRoutes/>
    <Footer/>
-   <Profile/>
-   <EditProfile/>
+   
     </>
   )
 }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CUET PG MCA Mock Test</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>CUET PG MCA Mock Test</h1>
+  </header>
+  <main>
+    <section id="instructions">
+      <h2>Instructions</h2>
+      <p>Complete all sections: Reasoning, Mathematics, and Computer Science. Submit before the timer ends!</p>
+    </section>
+
+    <div id="timer">Time Left: <span id="time">60:00</span></div>
+
+    <div id="quiz-container">
+      <div id="questions"></div>
+      <button id="prev-btn" onclick="prevQuestion()">Previous</button>
+      <button id="next-btn" onclick="nextQuestion()">Next</button>
+      <button id="submit-btn" onclick="submitQuiz()">Submit</button>
+    </div>
+
+    <section id="result" style="display: none;">
+      <h2>Results</h2>
+      <p>Your score: <span id="score"></span>/75</p>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

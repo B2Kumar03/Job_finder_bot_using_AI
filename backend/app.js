@@ -19,6 +19,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 
+import userRoutes from "./routes/userRoutes.js";
+app.use("/user", userRoutes)
+
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

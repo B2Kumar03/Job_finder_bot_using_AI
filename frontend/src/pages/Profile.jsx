@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaLinkedin, FaGithub, FaTwitter, FaCamera } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Profile = () => {
   const navigate = useNavigate(); // Add this line to use navigate hook
+  const {user1}=useContext(AuthContext);
+
   const user = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    profilePicture: "", // Leave blank to show the upload icon
+    name: user1?.displayName,
+    email: user1?.email,
+    profilePicture:user1?.photoURL, // Leave blank to show the upload icon
     bio: "Experienced full-stack developer specializing in building scalable web applications and APIs.",
     jobTitle: "Senior Software Engineer",
     location: "San Francisco, CA",

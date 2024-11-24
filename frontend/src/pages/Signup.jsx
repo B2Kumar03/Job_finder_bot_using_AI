@@ -1,16 +1,41 @@
-import React, { useState } from "react";
-import {  FaMicrosoft, FaGithub } from "react-icons/fa";
+import React, { useContext, useState } from "react";
+import { FaMicrosoft, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../firebase/firebaseConfig.js"; // Firebase config
+import { AuthContext } from "../context/AuthContext.jsx";
 
 const Signup = () => {
   const [isLogin, setIsLogin] = useState(false);
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
+
+  console.log(user);
+
+  const auth = getAuth(app); // Initialize Firebase Auth
+  const provider = new GoogleAuthProvider(); // Google provider
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
     navigate("/login");
+  };
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("User successfully logged in:", user);
+        // Optionally redirect or save user info
+        navigate("/dashboard");
+        setUser(() =>user );
 
+        console.log(user.photoURL);
+      
+      })
+      .catch((error) => {
+        console.error("Error during login:", error.message);
+        alert("Login failed. Please try again.");
+      });
   };
 
   return (
@@ -21,14 +46,18 @@ const Signup = () => {
           {isLogin ? "Login" : "Sign Up"}
         </h2>
         <p className="text-center text-gray-600 mb-6">
-          {isLogin ? "Welcome back! Please login to continue." : "Create a new account to get started."}
+          {isLogin
+            ? "Welcome back! Please login to continue."
+            : "Create a new account to get started."}
         </p>
 
         {/* Form */}
         <form>
           {!isLogin && (
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-medium mb-2">Full Name</label>
+              <label className="block text-gray-700 text-sm font-medium mb-2">
+                Full Name
+              </label>
               <input
                 type="text"
                 placeholder="Enter your full name"
@@ -37,7 +66,9 @@ const Signup = () => {
             </div>
           )}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-2">Email</label>
+            <label className="block text-gray-700 text-sm font-medium mb-2">
+              Email
+            </label>
             <input
               type="email"
               placeholder="Enter your email"
@@ -45,7 +76,9 @@ const Signup = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-2">Password</label>
+            <label className="block text-gray-700 text-sm font-medium mb-2">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter your password"
@@ -79,19 +112,13 @@ const Signup = () => {
         </div>
 
         {/* Social Login Options */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <button className="flex items-center justify-center text-[black] gap-2 border px-4 py-2 rounded-lg hover:bg-gray-100">
+        <div className="grid">
+          <button
+            className="flex items-center justify-center text-[black] gap-2 border px-4 py-2 rounded-lg hover:bg-gray-100"
+            onClick={handleGoogleLogin}
+          >
             <FcGoogle className="text-red-500" />
-            
-            Google
-          </button>
-          <button className="flex items-center justify-center text-[black] gap-2 border px-4 py-2 rounded-lg hover:bg-gray-100">
-            <FaMicrosoft className="text-blue-600" />
-            Microsoft
-          </button>
-          <button className="flex items-center justify-center gap-2 text-[black] border px-4 py-2 rounded-lg hover:bg-gray-100">
-            <FaGithub className="text-gray-800" />
-            GitHub
+            Sign in with Google
           </button>
         </div>
       </div>

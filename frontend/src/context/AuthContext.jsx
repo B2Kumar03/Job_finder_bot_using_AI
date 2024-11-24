@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Create the AuthContext
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // AuthProvider component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Store user information
+  const [user1, setUser] = useState(null); // Store user information
   const [loading, setLoading] = useState(true); // Loading state for async actions
 
   // Simulate fetching user data (replace with real API logic)
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user1,setUser, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { MdHistory } from "react-icons/md";
 import { FaLaptopCode, FaBriefcase, FaUserAlt } from "react-icons/fa";
 import icon from "../../public/assets/icons/icon.png";
+import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showMenu, setShowMenu] = useState(false);
+  const { user1 } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const dummySuggestions = [
     "Software Engineer",
@@ -103,23 +107,40 @@ const Navbar = () => {
               <FaBriefcase className="text-2xl mb-1" />
               Jobs
             </a>
-            <a
-              href="/login"
-              className="flex flex-col items-center text-gray-600 hover:text-blue-600 font-medium"
-            >
-              <FaUserAlt className="text-2xl mb-1" />
-              Login
-            </a>
+            {!user1 && (
+              <a
+                href="/login"
+                className="flex flex-col items-center text-gray-600 hover:text-blue-600 font-medium"
+              >
+                <FaUserAlt className="text-2xl mb-1" />
+                Login
+              </a>
+            )}
           </div>
 
           {/* Action Button */}
           <div className="ml-4">
-            <a
-              href="/signup"
-              className="bg-blue-600 text-white px-4 py-4 rounded-lg hover:bg-blue-700"
-            >
-              SignUp
-            </a>
+            {user1 ? (
+              <div className="flex items-center"  onClick={()=>{
+                navigate("/user/profile");
+              }}>
+                <img
+                  src={user1.photoURL}
+                  alt="User Icon"
+                  className="w-8 h-8 rounded-full mr-2"
+                />
+                <span className="text-gray-600 font-medium">
+                  {user1.displayName}
+                </span>
+              </div>
+            ) : (
+              <a
+                href="/signup"
+                className="bg-blue-600 text-white px-4 py-4 rounded-lg hover:bg-blue-700"
+              >
+                SignUp
+              </a>
+            )}
           </div>
         </div>
       </div>

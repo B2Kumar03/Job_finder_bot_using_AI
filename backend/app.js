@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import tokenGenerator from "./utils/generateToken.js";
 const app = express();
 
 app.use(express.json({ limit: "50mb" })); // Adjust the limit as needed
@@ -26,7 +25,7 @@ app.use("/user", userRoutes)
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-console.log(tokenGenerator(1));
+
 
 
 
